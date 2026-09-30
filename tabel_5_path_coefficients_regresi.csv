@@ -1,0 +1,13 @@
+Model,Variabel Dependen,Variabel Independen,Path Coefficient (Beta),t-Statistic,p-Value,R-Squared Model,Adjusted R-Squared,Kesimpulan Hipotesis
+Model 1 (Predictors of Platform Trust),PT (Platform Trust),IQ,0.408,6.267,0.0,0.479,0.47,Signifikan (Diterima)
+Model 1 (Predictors of Platform Trust),PT (Platform Trust),PP,0.158,2.547,0.0115,0.479,0.47,Signifikan (Diterima)
+Model 1 (Predictors of Platform Trust),PT (Platform Trust),IR,-0.112,-2.389,0.0177,0.479,0.47,Signifikan (Diterima)
+Model 1 (Predictors of Platform Trust),PT (Platform Trust),PC,0.223,3.944,0.0001,0.479,0.47,Signifikan (Diterima)
+Model 2 (Predictors of Decision Confidence),DC (Decision Confidence),PT,0.253,3.915,0.0001,0.475,0.464,Signifikan (Diterima)
+Model 2 (Predictors of Decision Confidence),DC (Decision Confidence),PC,0.364,6.187,0.0,0.475,0.464,Signifikan (Diterima)
+Model 2 (Predictors of Decision Confidence),DC (Decision Confidence),IR,0.017,0.35,0.7269,0.475,0.464,Tidak Signifikan
+Model 2 (Predictors of Decision Confidence),DC (Decision Confidence),PP,0.178,2.814,0.0053,0.475,0.464,Signifikan (Diterima)
+Model 2 (Predictors of Decision Confidence),DC (Decision Confidence),IQ,0.044,0.626,0.5317,0.475,0.464,Tidak Signifikan
+Model 3 (Predictors of Decision Commitment),DCO (Decision Commitment),DC,0.496,8.436,0.0,0.535,0.529,Signifikan (Diterima)
+Model 3 (Predictors of Decision Commitment),DCO (Decision Commitment),PT,0.08,1.46,0.1457,0.535,0.529,Tidak Signifikan
+Model 3 (Predictors of Decision Commitment),DCO (Decision Commitment),PC,0.255,4.487,0.0,0.535,0.529,Signifikan (Diterima)

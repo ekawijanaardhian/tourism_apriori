@@ -1,0 +1,10 @@
+Kode,Konstruk,Jumlah Item,N Valid,Mean,SD,Cronbach Alpha,Composite Reliability (CR),Average Variance Extracted (AVE),Sqrt(AVE),Status Validitas & Reliabilitas
+IQ,Information Quality,5,248,4.869,0.631,0.859,0.899,0.641,0.8,Valid & Reliabel (Memenuhi Syarat)
+PP,Personalization Fit,4,248,4.923,0.627,0.823,0.883,0.655,0.81,Valid & Reliabel (Memenuhi Syarat)
+PT,Platform Trust (GenAI),4,248,4.389,0.78,0.879,0.917,0.735,0.857,Valid & Reliabel (Memenuhi Syarat)
+IR,Information Risk / Skepticism,4,248,4.581,0.884,0.746,0.841,0.57,0.755,Valid & Reliabel (Memenuhi Syarat)
+PC,Perceived Control,4,248,4.936,0.62,0.728,0.837,0.564,0.751,Valid & Reliabel (Memenuhi Syarat)
+DC,Decision Confidence,4,248,4.683,0.648,0.845,0.899,0.692,0.832,Valid & Reliabel (Memenuhi Syarat)
+DCO,Decision Commitment,4,248,4.777,0.673,0.854,0.904,0.703,0.839,Valid & Reliabel (Memenuhi Syarat)
+SHL,Shariah / Halal Literacy,4,241,4.827,0.69,0.819,0.884,0.656,0.81,Valid & Reliabel (Memenuhi Syarat)
+SCT,Shariah Congruence Trust,4,241,4.698,0.725,0.925,0.947,0.818,0.904,Valid & Reliabel (Memenuhi Syarat)

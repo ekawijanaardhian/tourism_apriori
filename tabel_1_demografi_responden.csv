@@ -1,0 +1,54 @@
+Kategori,Sub-Kategori / Opsi,Frekuensi (N),Persentase (%)
+Jenis Kelamin,Perempuan,162,65.32
+Jenis Kelamin,Laki-Laki,86,34.68
+Usia,18–24 tahun,223,89.92
+Usia,18–24 years,8,3.23
+Usia,35–44 years,4,1.61
+Usia,35–44 tahun,4,1.61
+Usia,25–34 years,4,1.61
+Usia,25–34 tahun,3,1.21
+Usia,45–54 tahun,2,0.81
+Pendidikan,Diploma / Sarjana,158,63.71
+Pendidikan,Sekolah Menengah Atas atau yang setara,69,27.82
+Pendidikan,Diploma / Vocational school,9,3.63
+Pendidikan,High school or equivalent,6,2.42
+Pendidikan,Doctoral degree,5,2.02
+Pendidikan,Magister/ Master,1,0.4
+Pekerjaan,Mahasiswa,221,89.11
+Pekerjaan,Student,7,2.82
+Pekerjaan,Pegawai Swasta,5,2.02
+Pekerjaan,Private sector employee,4,1.61
+Pekerjaan,Pegawai Pemerintah,3,1.21
+Pekerjaan,Entrepreneur,3,1.21
+Pekerjaan,Government employee,1,0.4
+Pekerjaan,Dosen,1,0.4
+Pekerjaan,pendidik,1,0.4
+Pekerjaan,Freelancer,1,0.4
+Pekerjaan,Wiraswasta,1,0.4
+Frekuensi Wisata Tahunan,2–3 kali setahun,94,37.9
+Frekuensi Wisata Tahunan,Dibawah sekali setahun,50,20.16
+Frekuensi Wisata Tahunan,Sekali setahun,38,15.32
+Frekuensi Wisata Tahunan,Lebih dari 5 kali setahun,32,12.9
+Frekuensi Wisata Tahunan,4–5 kali setahun,18,7.26
+Frekuensi Wisata Tahunan,Once a year,9,3.63
+Frekuensi Wisata Tahunan,2–3 times a year,6,2.42
+Frekuensi Wisata Tahunan,More than 5 times a year,1,0.4
+Platform GenAI Utama,ChatGPT,183,73.79
+Platform GenAI Utama,Gemini,53,21.37
+Platform GenAI Utama,Claude,9,3.63
+Platform GenAI Utama,Google AI,1,0.4
+Platform GenAI Utama,"claude, duckduck ai claude haiku 4.5",1,0.4
+Platform GenAI Utama,Deepseek (AI China),1,0.4
+Penggunaan OTA,Ya,200,80.65
+Penggunaan OTA,Tidak,44,17.74
+Penggunaan OTA,nan,4,1.61
+Pola Alur Penggunaan,"GenAI terlebih dahulu, kemudian OTA",118,47.58
+Pola Alur Penggunaan,Digunakan secara bergantian,39,15.73
+Pola Alur Penggunaan,"OTA terlebih dahulu, kemudian GenAI",24,9.68
+Pola Alur Penggunaan,Tidak ada urutan tertentu,24,9.68
+Pola Alur Penggunaan,Digunakan untuk fungsi yang berbeda,21,8.47
+Pola Alur Penggunaan,Tidak menggunakan OTA,15,6.05
+Pola Alur Penggunaan,nan,7,2.82
+Verifikasi Silang (Cross-Check),Ya,231,93.15
+Verifikasi Silang (Cross-Check),Tidak,15,6.05
+Verifikasi Silang (Cross-Check),nan,2,0.81

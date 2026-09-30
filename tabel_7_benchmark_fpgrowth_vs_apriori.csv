@@ -1,0 +1,5 @@
+Min Support Threshold,Jumlah Frequent Itemsets,Waktu FP-Growth (ms),Waktu Apriori (ms),Speedup Factor (Apriori/FP-Growth)
+0.3,3238,129.18,25.37,0.2
+0.25,9989,152.78,162.13,1.06
+0.2,34514,625.08,509.63,0.82
+0.15,155199,2195.49,6870.53,3.13

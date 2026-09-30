@@ -1,0 +1,6 @@
+Jalur Mediasi,Indirect Beta,95% CI Lower,95% CI Upper,p-Value,Kesimpulan Mediasi
+PT -> DC -> DCO,0.127,0.05,0.214,0.0,Signifikan (Mediasi Terbukti)
+IQ -> PT -> DC,0.104,0.044,0.174,0.0,Signifikan (Mediasi Terbukti)
+PP -> PT -> DC,0.04,0.007,0.085,0.0136,Signifikan (Mediasi Terbukti)
+PC -> PT -> DC,0.056,0.022,0.098,0.0,Signifikan (Mediasi Terbukti)
+PC -> DC -> DCO,0.181,0.104,0.268,0.0,Signifikan (Mediasi Terbukti)
