@@ -1,9 +1,7 @@
-import pandas as pd
 import numpy as np
-from scipy import stats
+import pandas as pd
 import statsmodels.api as sm
 
-# 1. Load Data & Screening
 df = pd.read_excel("All - From Intention to Decision - 319 Respondent.xlsx")
 col_a1, col_a2, col_a3 = df.columns[1], df.columns[2], df.columns[3]
 mask_screen = (
@@ -25,13 +23,11 @@ demog_cols = {
     'CrossCheck': df.columns[13]
 }
 
-print("=== 1. DEMOGRAFI & PROFIL RESPONDEN (N = 248) ===")
 for k, col in demog_cols.items():
-    print(f"\n--- {k} ---")
     counts = df_screened[col].value_counts(dropna=False)
     pcts = df_screened[col].value_counts(normalize=True, dropna=False) * 100
     for idx in counts.index:
-        print(f"  {idx}: {counts[idx]} ({pcts[idx]:.1f}%)")
+        print(f"{k} - {idx}: {counts[idx]} ({pcts[idx]:.1f}%)")
 
 constructs = {
     'IQ': [df.columns[15], df.columns[16], df.columns[17], df.columns[18], df.columns[19]],
@@ -58,7 +54,8 @@ for cname, items in constructs.items():
 def cronbach_alpha(data):
     d = data.dropna()
     k = d.shape[1]
-    if k <= 1: return 0.0
+    if k <= 1:
+        return 0.0
     item_vars = d.var(axis=0, ddof=1)
     total_var = d.sum(axis=1).var(ddof=1)
     return (k / (k - 1)) * (1 - item_vars.sum() / total_var)
@@ -68,14 +65,14 @@ def calc_rel_val(data):
     corr = d.corr().values
     eigvals, eigvecs = np.linalg.eigh(corr)
     loadings = eigvecs[:, -1] * np.sqrt(eigvals[-1])
-    if np.mean(loadings) < 0: loadings = -loadings
+    if np.mean(loadings) < 0:
+        loadings = -loadings
     loadings_sq = loadings ** 2
     ave = np.mean(loadings_sq)
     cr = (np.sum(loadings) ** 2) / ((np.sum(loadings) ** 2) + np.sum(1 - loadings_sq))
     alpha = cronbach_alpha(d)
     return alpha, cr, ave, loadings
 
-print("\n=== 2. MEASUREMENT MODEL SUMMARY ===")
 res_mm = []
 for cname, items in constructs.items():
     d = df_screened[items]
@@ -94,13 +91,11 @@ for cname, items in constructs.items():
         'Sqrt_AVE': np.sqrt(ave),
         'Loadings': [round(float(x), 3) for x in loadings]
     })
-    print(f"{cname:5s} | N={len(d.dropna()):3d} | Mean={m_score:.2f} | SD={sd_score:.2f} | Alpha={alpha:.3f} | CR={cr:.3f} | AVE={ave:.3f} | Sqrt(AVE)={np.sqrt(ave):.3f}")
+    print(f"{cname:5s} | N={len(d.dropna()):3d} | Mean={m_score:.2f} | SD={sd_score:.2f} | Alpha={alpha:.3f} | CR={cr:.3f} | AVE={ave:.3f}")
 
 core_cnames = ['IQ', 'PP', 'PT', 'IR', 'PC', 'DC', 'DCO']
-print("\n=== 3. DISCRIMINANT VALIDITY: FORNELL-LARCKER CRITERION ===")
 scores_df = df_screened[[f"{c}_score" for c in core_cnames]].dropna()
 corr_matrix = scores_df.corr()
-print("Constructs:\t" + "\t".join(core_cnames))
 for i, c1 in enumerate(core_cnames):
     row_str = f"{c1}\t"
     for j, c2 in enumerate(core_cnames):
@@ -121,13 +116,10 @@ def calc_htmt(items1, items2, df_in):
             r = df_in[[it1, it2]].dropna().corr().iloc[0, 1]
             between_corrs.append(abs(r))
     mean_between = np.mean(between_corrs)
-    within1 = [abs(df_in[[items1[i], items1[j]]].dropna().corr().iloc[0, 1]) for i in range(len(items1)) for j in range(i+1, len(items1))]
-    within2 = [abs(df_in[[items2[i], items2[j]]].dropna().corr().iloc[0, 1]) for i in range(len(items2)) for j in range(i+1, len(items2))]
-    htmt = mean_between / np.sqrt(np.mean(within1) * np.mean(within2))
-    return htmt
+    within1 = [abs(df_in[[items1[i], items1[j]]].dropna().corr().iloc[0, 1]) for i in range(len(items1)) for j in range(i + 1, len(items1))]
+    within2 = [abs(df_in[[items2[i], items2[j]]].dropna().corr().iloc[0, 1]) for i in range(len(items2)) for j in range(i + 1, len(items2))]
+    return mean_between / np.sqrt(np.mean(within1) * np.mean(within2))
 
-print("\n=== 4. DISCRIMINANT VALIDITY: HTMT MATRIX ===")
-print("Constructs:\t" + "\t".join(core_cnames))
 for i, c1 in enumerate(core_cnames):
     row_str = f"{c1}\t"
     for j, c2 in enumerate(core_cnames):
@@ -138,32 +130,26 @@ for i, c1 in enumerate(core_cnames):
             row_str += "-\t"
     print(row_str)
 
-print("\n=== 5. STRUCTURAL MODEL / PATH ANALYSIS ===")
 data_model = df_screened[[f"{c}_score" for c in core_cnames]].dropna().copy()
 for c in core_cnames:
     data_model[f"{c}_z"] = (data_model[f"{c}_score"] - data_model[f"{c}_score"].mean()) / data_model[f"{c}_score"].std()
 
 X1 = data_model[['IQ_z', 'PP_z', 'IR_z', 'PC_z']]
 ols1 = sm.OLS(data_model['PT_z'], sm.add_constant(X1)).fit()
-print(f"\n--- MODEL 1: Predictors of Platform Trust (PT) [R2 = {ols1.rsquared:.3f}, Adj R2 = {ols1.rsquared_adj:.3f}] ---")
 for var in ['IQ_z', 'PP_z', 'IR_z', 'PC_z']:
-    print(f"  {var:10s}: Beta = {ols1.params[var]:+.3f}, t = {ols1.tvalues[var]:6.3f}, p = {ols1.pvalues[var]:.4f}")
+    print(f"PT ~ {var}: Beta={ols1.params[var]:+.3f}, t={ols1.tvalues[var]:.3f}, p={ols1.pvalues[var]:.4f}")
 
 X2 = data_model[['PT_z', 'PC_z', 'IR_z', 'PP_z', 'IQ_z']]
 ols2 = sm.OLS(data_model['DC_z'], sm.add_constant(X2)).fit()
-print(f"\n--- MODEL 2: Predictors of Decision Confidence (DC) [R2 = {ols2.rsquared:.3f}, Adj R2 = {ols2.rsquared_adj:.3f}] ---")
 for var in ['PT_z', 'PC_z', 'IR_z', 'PP_z', 'IQ_z']:
-    print(f"  {var:10s}: Beta = {ols2.params[var]:+.3f}, t = {ols2.tvalues[var]:6.3f}, p = {ols2.pvalues[var]:.4f}")
+    print(f"DC ~ {var}: Beta={ols2.params[var]:+.3f}, t={ols2.tvalues[var]:.3f}, p={ols2.pvalues[var]:.4f}")
 
 X3 = data_model[['DC_z', 'PT_z', 'PC_z']]
 ols3 = sm.OLS(data_model['DCO_z'], sm.add_constant(X3)).fit()
-print(f"\n--- MODEL 3: Predictors of Decision Commitment (DCO) [R2 = {ols3.rsquared:.3f}, Adj R2 = {ols3.rsquared_adj:.3f}] ---")
 for var in ['DC_z', 'PT_z', 'PC_z']:
-    print(f"  {var:10s}: Beta = {ols3.params[var]:+.3f}, t = {ols3.tvalues[var]:6.3f}, p = {ols3.pvalues[var]:.4f}")
+    print(f"DCO ~ {var}: Beta={ols3.params[var]:+.3f}, t={ols3.tvalues[var]:.3f}, p={ols3.pvalues[var]:.4f}")
 
-# Mediation Bootstrapping
 np.random.seed(42)
-n_boot = 5000
 boot_results = {
     'PT -> DC -> DCO': [],
     'IQ -> PT -> DC': [],
@@ -172,23 +158,20 @@ boot_results = {
     'PC -> DC -> DCO': []
 }
 N = len(data_model)
-for _ in range(n_boot):
+for _ in range(5000):
     sample = data_model.sample(n=N, replace=True)
     m1 = sm.OLS(sample['PT_z'], sm.add_constant(sample[['IQ_z', 'PP_z', 'IR_z', 'PC_z']])).fit()
     m2 = sm.OLS(sample['DC_z'], sm.add_constant(sample[['PT_z', 'PC_z', 'IR_z', 'PP_z', 'IQ_z']])).fit()
     m3 = sm.OLS(sample['DCO_z'], sm.add_constant(sample[['DC_z', 'PT_z', 'PC_z']])).fit()
-    
     boot_results['PT -> DC -> DCO'].append(m2.params['PT_z'] * m3.params['DC_z'])
     boot_results['IQ -> PT -> DC'].append(m1.params['IQ_z'] * m2.params['PT_z'])
     boot_results['PP -> PT -> DC'].append(m1.params['PP_z'] * m2.params['PT_z'])
     boot_results['PC -> PT -> DC'].append(m1.params['PC_z'] * m2.params['PT_z'])
     boot_results['PC -> DC -> DCO'].append(m2.params['PC_z'] * m3.params['DC_z'])
 
-print("\n=== 6. MEDIATION ANALYSIS (BOOTSTRAP 5000 SAMPLES) ===")
 for path, vals in boot_results.items():
     mean_val = np.mean(vals)
     ci_lower = np.percentile(vals, 2.5)
     ci_upper = np.percentile(vals, 97.5)
     p_val = 2 * min(np.mean(np.array(vals) <= 0), np.mean(np.array(vals) >= 0))
-    sig = "Signifikan (Mediasi Terbukti)" if (ci_lower > 0 or ci_upper < 0) else "Tidak Signifikan"
-    print(f"Path {path:20s}: Indirect Beta = {mean_val:+.3f}, 95% CI = [{ci_lower:+.3f}, {ci_upper:+.3f}], p = {p_val:.4f} -> {sig}")
+    print(f"{path}: Beta={mean_val:+.3f}, CI=[{ci_lower:+.3f}, {ci_upper:+.3f}], p={p_val:.4f}")
